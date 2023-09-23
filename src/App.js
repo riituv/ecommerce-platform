@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import Navbar from "./Components/Navbar"
+import NavBottom from './Components/NavBottom';
+import Footer from './Components/Footer';
+import Signup from './Pages/Signup';
+import Home from './Pages/Home';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Login from "./Pages/Login"
+import { useState } from "react";
 
 function App() {
+  const [selectedCategory, setSelectedCategory] = useState('');
+
+  const handleSelectCategory = (category) => {
+    setSelectedCategory(category);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router >
+      <Navbar onSelectCategory={handleSelectCategory}/>
+      <NavBottom />
+        <Routes>
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/" element={<Home selectedCategory={selectedCategory}/>}/>
+        <Route path="/signup" element={<Signup/>}/>
+        </Routes>
+      <Footer />
+    </Router >
   );
 }
 
