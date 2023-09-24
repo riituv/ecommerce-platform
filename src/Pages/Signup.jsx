@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
 
@@ -10,6 +10,8 @@ const Signup = () => {
     email: '',
     password: '',
   });
+
+  const navigate = useNavigate();
 
   //set errors
   const [errors, setErrors] = useState({});
@@ -23,6 +25,7 @@ const Signup = () => {
       ...formData,
       [name]: value,
     });
+    setErrors({ ...errors, [name]: '' }); 
   };
 
   //submit form
@@ -53,25 +56,29 @@ const Signup = () => {
         'Password must be at least 6 characters with at least one uppercase letter, one special character, and one number';
     }
 
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-    } else {
-      setIsRegistered(true);
-    }
+    setErrors(validationErrors);
 
-    if (isRegistered) {
-      return <Link to="/" />;
+    if (Object.keys(validationErrors).length === 0) {
+      setIsRegistered(true);
+      navigate('/') // Redirect to the home page after 2 seconds
     }
+    
+
+    console.log(errors);
+    
 
   };
 
   return (
     <div>
 
-      <div className='flex border-2 border-gray-300 md:w-1/5 w-2/4 rounded-lg h-auto mx-auto 
+      <div className='flex border-2 border-gray-300 w-72 md:w-80  rounded-lg h-auto mx-auto 
     flex-col gap-6 my-20 p-6'>
 
-        <form onsSubmit={handleSubmit}
+    {isRegistered ? (
+      <h1>Registered</h1>
+    ) :(
+      <form onSubmit={handleSubmit}
         className='flex flex-col gap-4'>
 
           <div className='flex flex-col gap-2 text-sm'>
@@ -145,18 +152,19 @@ const Signup = () => {
           </button>
         </form>
 
+        
+        
+    )}
+    <hr className='flex-grow border-t border-gray-300 mr-2 w-full' />
 
-
-        <hr className='flex-grow border-t border-gray-300 mr-2 w-full' />
-
-        <div className='text-sm font-semibold'>
-          <p>Already have an account?
-            <Link
-              className="text-blue-500 ml-1 hover:text-yellow-600" to="/login" >
-              SignIn
-            </Link>
-          </p>
-        </div>
+    <div className='text-sm font-semibold'>
+      <p>Already have an account?
+        <Link
+          className="text-blue-500 ml-1 hover:text-yellow-600" to="/login" >
+          SignIn
+        </Link>
+      </p>
+    </div>
 
       </div>
 

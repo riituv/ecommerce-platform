@@ -73,7 +73,13 @@ const NavBottom = () => {
         <ul className='flex flex-row text-l font-semibold justify-between'>
             {links.map(({id, link})=>(
                 <li key={id}
-                className='text-gray-100'>
+                className={`text-gray-100
+                ${id < 6  ? 'hidden sm:flex' : ''} 
+                ${id < 7 ? 'hidden md:flex' : ''} 
+                ${id < 9 ? 'hidden lg:flex' : ''} 
+                ${id < 14 ? 'hidden xl:flex' : ''}
+                `}
+                > 
                 <p>{link}</p>
                 </li>
                 ))}

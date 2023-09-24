@@ -14,7 +14,7 @@ const Navbar = ({onSelectCategory}) => {
     const handleCategoryChange = (event) => {
         const newCategory = event.target.value;
         setSelectedCategory(newCategory);
-        onSelectCategory(newCategory); // Pass the selected category to the parent component
+        onSelectCategory(newCategory);
       };
 
     useEffect(() => {
@@ -59,22 +59,22 @@ const Navbar = ({onSelectCategory}) => {
 
 
     return (
-        <div className='w-full flex justify-between items-center px-4
+        <div className='w-full flex flex-row gap-2 justify-between items-center px-4
          h-20 text-white fixed top-0 left-0 right-0 z-10 bg-black mt-0'>
 
             {/*App name */}
             <div className='font-semibold text-xl'>
-                <Link to="/" className='text-4xl'>Amazon</Link>
+                <Link to="/" className='sm:text-2xl md:text-3xl lg:text-4xl'>Amazon</Link>
             </div>
 
             {/*select your address */}
-            <div className='flex flex-col'>
+            <div className='flex flex-col hidden md:block text-left '>
 
-                <div className='ml-6 font-semibold'>
+                <div className='lg:ml-6 md:ml-5 md:text-l text-sm font-semibold'>
                     <p>Hello</p>
                 </div>
 
-                <div className='flex flex-row gap-1 font-bold'>
+                <div className='flex flex-row md:text-l text-sm gap-1 font-bold'>
                     <HiOutlineLocationMarker size={20} />
                     <p>Select your address </p>
                 </div>
@@ -82,11 +82,11 @@ const Navbar = ({onSelectCategory}) => {
             </div>
 
             {/*search bar */}
-            <div className='w-2/4 flex flex-row'>
+            <div className='lg:w-2/4 flex flex-row md:w-3/4'>
                 <div className='flex flex-row hover:border-gray-500 inline-block'>
                     <select
                         className="block appearance-none bg-gray-300 h-10 border border-gray-300 
-                     px-4 py-2 rounded-l focus:outline-none w-auto 
+                     md:px-4 py-2 rounded-l focus:outline-none md:w-auto w-5/6 px-2 truncate
                     focus:shadow-outline text-black"
                         id="category"
                         value={selectedCategory}
@@ -102,14 +102,14 @@ const Navbar = ({onSelectCategory}) => {
                     <MdArrowDropDown size={25} color='gray' className='bg-gray-300 h-10' />
                 </div>
                 <input
-                    className='bg-white h-10 px-5 pr-16 rounded-r text-sm w-full'
+                    className='bg-white h-10 md:px-5 px-2 pr-16 rounded-r text-sm w-full'
                     type="text"
                     placeholder="Search Amazon.in"
                 />
             </div>
 
             {/*language option */}
-            <div>
+            <div className='hidden lg:block'>
                 <div className='flex flex-row gap-1 font-bold'>
                     <p>EN </p>
                     <MdArrowDropDown size={25} color='gray' />
@@ -124,9 +124,9 @@ const Navbar = ({onSelectCategory}) => {
                 onMouseLeave={handleMouseLeave}
             >
                 <div className="font-semibold">
-                    <p>Hello, sign in</p>
+                    <p className='md:text-l text-sm'>Hello, sign in</p>
                 </div>
-                <div className="flex items-center gap-1 font-bold cursor-pointer">
+                <div className="flex items-center gap-1 font-bold md:text-l text-sm cursor-pointer">
                     <Link to="/login">Accounts & Lists</Link>
                     <MdArrowDropDown size={25} color="gray" />
                 </div>
@@ -153,7 +153,7 @@ const Navbar = ({onSelectCategory}) => {
             </div>
 
             {/*returns and order */}
-            <div className='flex flex-col'>
+            <div className='flex flex-col hidden xl:block md:text-l text-sm'>
 
                 <div className='ml-6 font-semibold'>
                     <p>Returns</p>
@@ -166,7 +166,7 @@ const Navbar = ({onSelectCategory}) => {
             </div>
 
             {/*shopping cart */}
-            <div>
+            <div className='hidden xl:block'>
                 <div className='flex flex-row font-bold'>
                     <MdOutlineShoppingCart size={35} />
                     <p>Cart</p>
